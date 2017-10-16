@@ -4,6 +4,7 @@ const app = express()
 const router = express.Router()
 
 router.use(require('./health'))
+router.use(require('./trends'))
 
 app.set('x-powered-by', false)
 app.use(router)
