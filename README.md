@@ -22,7 +22,7 @@ $ cd simple-node-app && npm install
 $ npm start
 ```
 
-- Begin hitting the ([routes](#routes)) with `curl` or your favorite API testing tool.
+- Begin hitting the [routes](#routes) with `curl` or your favorite API testing tool.
 
 ## Testing
 
