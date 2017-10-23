@@ -45,6 +45,105 @@ $ npm run lint
 
 Grabs the latest trending data on Twitter for a given place.
 
+#### URL Parameter
+
+| URL Parameter | Required      | Description |
+| ------------- | ------------- | ----------- |
+| `place`      | True          | The place to search for trends |
+
+#### Success Response
+
+Sample Call: `curl localhost:3000/trends/denver`
+
+Status Code: `200`
+
+Response Body:
+```
+[
+	{
+		"trends": [
+			{
+				"name": "#Broncos",
+				"url": "http://twitter.com/search?q=%23Broncos",
+				"promoted_content": null,
+				"query": "%23Broncos",
+				"tweet_volume": null
+			},
+			{
+				"name": "Trevor",
+				"url": "http://twitter.com/search?q=Trevor",
+				"promoted_content": null,
+				"query": "Trevor",
+				"tweet_volume": 18226
+			},
+			...
+		],
+		"as_of": "2017-10-22T23:49:56Z",
+		"created_at": "2017-10-22T23:46:34Z",
+		"locations": [
+			{
+				"name": "Denver",
+				"woeid": 2391279
+			}
+		]
+	}
+]
+```
+
+#### Error Responses
+
+Sample Call: `curl localhost:3000/trends/uranus`
+
+Status Code: `404`
+
+Response Body:
+```
+{
+	"statusCode": 404,
+	"error": "Not Found",
+	"message": "uranus could not be found"
+}
+```
+
+Sample Call: `curl localhost:3000/trends/newburgh%20indiana`
+
+Status Code: `404`
+
+Response Body:
+```
+{
+	"statusCode": 404,
+	"error": "Not Found",
+	"message": "Trends for newburgh indiana could not be found"
+}
+```
+
+Sample Call: `curl localhost:3000/trends/denver`
+
+Status Code: `500`
+
+Response Body:
+```
+{
+	"statusCode": 500,
+	"error": "Internal Server Error",
+	"message": "An internal server error occurred"
+}
+```
+
 ### GET `/health`
 
 A basic health check endpoint. Useful for system monitoring purposes.
+
+#### Success Response
+
+Sample Call: `curl localhost:3000/health`
+
+Status Code: `200`
+
+Response Body:
+```
+{
+	"status": "healthy"
+}
+```
