@@ -14,11 +14,13 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Verify Release is from Development Branch
+      - name: Check Release Target Branch
         run: |
-          DEFAULT_BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
-          if [[ "$DEFAULT_BRANCH" != "development" ]]; then
-            echo "This release is not from the development branch. Exiting..."
+          TARGET_BRANCH="${{ github.event.release.target_commitish }}"
+          echo "Release is targeting branch: $TARGET_BRANCH"
+          
+          if [[ "$TARGET_BRANCH" != "development" ]]; then
+            echo "Error: Release is not targeting the 'development' branch. Exiting..."
             exit 1
           fi
 
