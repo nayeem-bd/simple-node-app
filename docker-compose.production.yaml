@@ -16,12 +16,16 @@ services:
     networks:
       - mynodeapp
 
-#  nginx:
-#    image: nginx
-#    expose:
-#      - 80:80
-#    networks:
-#      - mynodeapp
+  nginx:
+    image: nginx:alpine
+    ports:
+      - 80:80
+    networks:
+      - mynodeapp
+    volumes:
+      - ./nginx.conf:/ect/nginx/nginx.conf
+    depends_on:
+      - api
 
 
 networks:
